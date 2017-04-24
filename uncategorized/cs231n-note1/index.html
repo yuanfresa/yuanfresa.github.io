@@ -96,7 +96,7 @@
 </ul>
 <ol>
 <li><p>Learning rate<br>$ error = ReLU(x_{n}) - y$</p>
-<p> $ \dfrac {\partial error} {\partial x<em>{n} }=\delta </em>{n}=\begin{cases} 1, x<em>{n}\geq 0\ 0, x</em>{n}&lt;0 \end{cases} $</p>
+<p> $ \dfrac {\partial error} {\partial x<em>{n} }=\delta</em>{n}=\begin{cases} 1, x<em>{n}\geq 0\ 0, x</em>{n}&lt;0 \end{cases} $</p>
 <p>The local gradient of ReLU (which is 1) multiply the gradient that flow-back because of back-propagation, the result of the updated gradient could be a large negative number. Proper learning rate to avoid “dead” zero</p>
 </li>
 <li><p>Monitor the “dead” units<br>How?   ==todo== </p>
