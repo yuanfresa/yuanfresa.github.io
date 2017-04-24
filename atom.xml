@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>大腿成长记</title>
+  <subtitle>Keep my dream alive, what if it come true?</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-04-24T21:12:40.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Yuan</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CS231n Neural Network part1: Setting up the Architecture 总结笔记</title>
+    <link href="http://yoursite.com/CS231n-notebook/CS231n-Neural-Network-part1-Setting-up-the-Architecture-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/CS231n-notebook/CS231n-Neural-Network-part1-Setting-up-the-Architecture-总结笔记/</id>
+    <published>2017-04-24T20:55:14.000Z</published>
+    <updated>2017-04-24T21:12:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Activation-functions"><a href="#Activation-functions" class="headerlink" title="Activation functions"></a>Activation functions</h2><blockquote>
+<p>Use the ReLU( $max(x,0)$), be careful with learning rates and possibly monitor the fraction of “dead” units in a network.</p>
+</blockquote>
+<ol>
+<li>Other options</li>
+</ol>
+<ul>
+<li>Leaky ReLU: A small negative slope</li>
+</ul>
+<p><img src="http://i1.piimg.com/567571/032b87291a258b3f.png" width="300px"></p>
+<ul>
+<li><p>Maxout: $ max(w_{1}^{T}x+b_{1}, w_{2}^{T}x+b_{2}) $</p>
+<p>Special case for ReLU($ w_{1}, b_{1}= 0$) and LeakyReLU<br>(+) linear operation, no saturation<br>(+) no dying<br>(-) double the number of parameters for every neuron  </p>
+</li>
+</ul>
+<ol>
+<li><p>Learning rate  </p>
+<script type="math/tex; mode=display">error = ReLU(x_{n}) - y</script><script type="math/tex; mode=display">\dfrac {\partial error} {\partial x_{n} }=\delta_{n}=\begin{cases} 1, x_{n}\geq 0\\ 0, x_{n}<0 \end{cases}</script><p>The local gradient of ReLU (which is 1) multiply the gradient that flow-back because of back-propagation, the result of the updated gradient could be a large negative number. Proper learning rate to avoid “dead” zero</p>
+</li>
+<li><p>Monitor the “dead” units<br>How?   <font color="Darkorange">todo</font></p>
+</li>
+<li><p>Why sigmoid/tanh out of stage?</p>
+</li>
+</ol>
+<ul>
+<li>Saturate and kill gradients</li>
+<li>Sigmoid outputs are not zero-centered</li>
+</ul>
+<h2 id="Neural-Network-architectures"><a href="#Neural-Network-architectures" class="headerlink" title="Neural Network architectures"></a>Neural Network architectures</h2><ol>
+<li>How many layers?<ul>
+<li>Do not count input layer</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Output layer commonly do not have an activation function</li>
+</ul>
+<ol>
+<li><p>How big the network is?</p>
+<ul>
+<li><p>number of neurons</p>
+<p>It’s easy to count the fully-connected layers, how about convolutional layers?    <font color="Darkorange">todo</font></p>
+</li>
+<li><p>number of parameters</p>
+<p>eg. In keras, use <code>model.summary()</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Representation-Power"><a href="#Representation-Power" class="headerlink" title="Representation Power"></a>Representation Power</h2><blockquote>
+<p>Neural networks are <strong>universal function approximators</strong></p>
+</blockquote>
+<p>For Neural Networks with fully-connected layers, one hidden layer suffices to approximate any function, what’s the point of using more layers and going deeper?</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tKfTcgy1feygdqnemxj317y0cigoz.jpg" alt=""></p>
+<p>However, for CNN, depth has been found to be an extremely importand component for good recognition system.</p>
+<ul>
+<li>images contain hierarchical structures, so several layers of processing make intuitive sense for this data domain</li>
+</ul>
+<h2 id="Setting-number-of-layers-and-their-sizes"><a href="#Setting-number-of-layers-and-their-sizes" class="headerlink" title="Setting number of layers and their sizes"></a>Setting number of layers and their sizes</h2><ul>
+<li><p>NN with more neurons can express more complicated functions</p>
+<ul>
+<li>blessing: learn more complicated data</li>
+<li>curse: easier to overfit, but it is better to use other method to prevent overfitting instead of reducing the <code>num_neurons</code></li>
+</ul>
+</li>
+<li><p>Regularization strength is the preferred way to control overfitting of a neural network.</p>
+<blockquote>
+<p>You should not be using smaller networks because you are afraid of overfitting. Instead, you should use as big of a neural network as your computational budget allows, and use other regularization techniques to control overfitting.</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      Theoretical bases and practical advices about NN architecture
+    
+    </summary>
+    
+      <category term="CS231n notebook" scheme="http://yoursite.com/categories/CS231n-notebook/"/>
+    
+    
+      <category term="deep learning" scheme="http://yoursite.com/tags/deep-learning/"/>
+    
+  </entry>
+  
+</feed>
