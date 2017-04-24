@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>cs231n note1 | Yuan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="Yuan">
+	<img src="/favicon.png" alt="Yuan"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://twitter.com/Yuan_Fresa/" target="_blank">Twitter</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      cs231n note1
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h1 id="CS231n-NN-part1：Setting-up-the-Architecture-总结笔记"><a href="#CS231n-NN-part1：Setting-up-the-Architecture-总结笔记" class="headerlink" title="CS231n NN part1：Setting up the Architecture 总结笔记"></a>CS231n NN part1：Setting up the Architecture 总结笔记</h1><h2 id="Activation-functions"><a href="#Activation-functions" class="headerlink" title="Activation functions"></a>Activation functions</h2><blockquote>
+<p>Use the ReLU( $max(x,0)$), be careful with learning rates and possibly monitor the fraction of “dead” units in a network.</p>
+</blockquote>
+<ol>
+<li>Other options</li>
+</ol>
+<ul>
+<li>Leaky ReLU: A small negative slope</li>
+</ul>
+<p><img src="http://i1.piimg.com/567571/032b87291a258b3f.png" width="300px"></p>
+<ul>
+<li><p>Maxout: $ max(w<em>{1}^{T}x+b</em>{1}, w<em>{2}^{T}x+b</em>{2}) $</p>
+<p>Special case for ReLU($ w<em>{1}, b</em>{1}= 0$) and LeakyReLU<br>(+) linear operation, no saturation<br>(+) no dying<br>(-) double the number of parameters for every neuron  </p>
+</li>
+</ul>
+<ol>
+<li><p>Learning rate<br>$ error = ReLU(x_{n}) - y$</p>
+<p> $ \dfrac {\partial error} {\partial x<em>{n} }=\delta </em>{n}=\begin{cases} 1, x<em>{n}\geq 0\ 0, x</em>{n}&lt;0 \end{cases} $</p>
+<p>The local gradient of ReLU (which is 1) multiply the gradient that flow-back because of back-propagation, the result of the updated gradient could be a large negative number. Proper learning rate to avoid “dead” zero</p>
+</li>
+<li><p>Monitor the “dead” units<br>How?   ==todo== </p>
+</li>
+<li><p>Why sigmoid/tanh out of stage?</p>
+</li>
+</ol>
+<ul>
+<li>Saturate and kill gradients</li>
+<li>Sigmoid outputs are not zero-centered</li>
+</ul>
+<h2 id="Neural-Network-architectures"><a href="#Neural-Network-architectures" class="headerlink" title="Neural Network architectures"></a>Neural Network architectures</h2><ol>
+<li>How many layers?<ul>
+<li>Do not count input layer</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Output layer commonly do not have an activation function</li>
+</ul>
+<ol>
+<li><p>How big the network is?</p>
+<ul>
+<li><p>number of neurons</p>
+<p>It’s easy to count the fully-connected layers, how about convolutional layers?    ==todo==</p>
+</li>
+<li><p>number of parameters</p>
+<p>eg. In keras, use <code>model.summary()</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Representation-Power"><a href="#Representation-Power" class="headerlink" title="Representation Power"></a>Representation Power</h2><blockquote>
+<p>Neural networks are <strong>universal function approximators</strong></p>
+</blockquote>
+<p>For Neural Networks with fully-connected layers, one hidden layer suffices to approximate any function, what’s the point of using more layers and going deeper?</p>
+<p>However, for CNN, depth has been found to be an extremely importand component for good recognition system.</p>
+<ul>
+<li>images contain hierarchical structures, so several layers of processing make intuitive sense for this data domain</li>
+</ul>
+<h2 id="Setting-number-of-layers-and-their-sizes"><a href="#Setting-number-of-layers-and-their-sizes" class="headerlink" title="Setting number of layers and their sizes"></a>Setting number of layers and their sizes</h2><ul>
+<li><p>NN with more neurons can express more complicated functions</p>
+<ul>
+<li>blessing: learn more complicated data</li>
+<li>curse: easier to overfit, but it is better to use other method to prevent overfitting instead of reducing the <code>num_neurons</code></li>
+</ul>
+</li>
+<li><p>Regularization strength is the preferred way to control overfitting of a neural network.</p>
+<blockquote>
+<p>You should not be using smaller networks because you are afraid of overfitting. Instead, you should use as big of a neural network as your computational budget allows, and use other regularization techniques to control overfitting.</p>
+</blockquote>
+</li>
+</ul>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-04-24T14:02:07.000Z" itemprop="datePublished">2017-04-24</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	<div id="disqus_thread"></div>
+<script type='text/javascript'>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//yuanfresa.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='http://oct8d1mqf.bkt.clouddn.com/2016-10-17-15%3A42%3A28.jpg' alt='Yuan'>
+					<div class="media__body">
+						<h4>Yuan</h4>
+						<p class='site-description'>Stay tuned</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="https://github.com/yuanfresa" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/yumemor" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/Yuan_Fresa/" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
