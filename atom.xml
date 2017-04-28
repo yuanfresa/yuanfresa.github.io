@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yuanfresa.github.io/"/>
-  <updated>2017-04-28T15:25:34.000Z</updated>
+  <updated>2017-04-28T15:36:03.000Z</updated>
   <id>http://yuanfresa.github.io/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于 Batch Normalization</title>
+    <link href="http://yuanfresa.github.io/paper-notes/%E5%85%B3%E4%BA%8E-Batch-Normalization/"/>
+    <id>http://yuanfresa.github.io/paper-notes/关于-Batch-Normalization/</id>
+    <published>2017-04-28T15:28:14.000Z</published>
+    <updated>2017-04-28T15:36:03.000Z</updated>
+    
+    <summary type="html">
+    
+      Notes for the paper https://arxiv.org/abs/1502.03167
+    
+    </summary>
+    
+      <category term="paper notes" scheme="http://yuanfresa.github.io/categories/paper-notes/"/>
+    
+    
+      <category term="deep learning" scheme="http://yuanfresa.github.io/tags/deep-learning/"/>
+    
+  </entry>
   
   <entry>
     <title>TensorFlow 学习笔记</title>
@@ -54,7 +74,7 @@
     <link href="http://yuanfresa.github.io/CS231n-notebook/CS231n-Neural-Network-part2-Setting-up-the-data-and-the-model-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/"/>
     <id>http://yuanfresa.github.io/CS231n-notebook/CS231n-Neural-Network-part2-Setting-up-the-data-and-the-model-总结笔记/</id>
     <published>2017-04-26T19:15:35.000Z</published>
-    <updated>2017-04-26T20:21:57.000Z</updated>
+    <updated>2017-04-28T15:34:50.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h2><p><strong>Rules of thumb not laws of the land:</strong> zero-centers and normalizes standard deviations are important for speeding up training</p>
 <blockquote>
@@ -83,7 +103,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Data-Preprocessing&quot;&gt;&lt;a href=&quot;#Data-Preprocessing&quot; class=&quot;headerlink&quot; title=&quot;Data Preprocessing&quot;&gt;&lt;/a&gt;Data Preprocessing&lt;/h2&gt;&lt;p&gt;&lt;stron
+      Insights about data preprocessing, initialization, regularization, loss function
     
     </summary>
     
