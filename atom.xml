@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yuanfresa.github.io/"/>
-  <updated>2017-04-28T15:36:03.000Z</updated>
+  <updated>2017-04-30T12:13:24.000Z</updated>
   <id>http://yuanfresa.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>preprocessing the data</title>
+    <link href="http://yuanfresa.github.io/TensorFlow/preprocessing-the-data/"/>
+    <id>http://yuanfresa.github.io/TensorFlow/preprocessing-the-data/</id>
+    <published>2017-04-30T09:56:26.000Z</published>
+    <updated>2017-04-30T12:13:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>并不是所有的data都会像mnist那样直接可以直接用</p>
+<p><code>from tensorflow.examples.tutorials.mnist import input_data</code> </p>
+<p>How can we input external data into TensorFlow</p>
+<h2 id="From-csv-to-Tensor"><a href="#From-csv-to-Tensor" class="headerlink" title="From .csv to Tensor"></a>From .csv to Tensor</h2><p>If we have data stored in .csv file and we want to prepare data for the NN like below.</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwgy1ff4u2j4r3yj31260osmyx.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A beautiful library to help us work with data as tables</span></div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="comment"># read data</span></div><div class="line">dataframe = pd.read_csv(<span class="string">"data.csv"</span>) </div><div class="line"><span class="comment"># Remove columns we don't care about</span></div><div class="line">dataframe = dataframe.drop([<span class="string">"x3"</span>, <span class="string">"x4"</span>, <span class="string">"x5"</span>], axis = <span class="number">1</span>)</div><div class="line"><span class="comment"># Shape it in matrices to feed it to TensorFlow</span></div><div class="line">inputX = dataframe.loc[:, [<span class="string">'x1'</span>, <span class="string">'x2'</span>]].as_matrix()</div><div class="line">outputY = dataframe.loc[:, [<span class="string">'y1'</span>,<span class="string">'y2'</span>]].as_matrix()</div></pre></td></tr></table></figure>
+<h2 id="From-Numpy-to-Tensor"><a href="#From-Numpy-to-Tensor" class="headerlink" title="From Numpy to Tensor"></a>From Numpy to Tensor</h2><ol>
+<li><code>tf.convert_to_tensor(a)</code> convenient but doesn’t scale</li>
+</ol>
+<ol>
+<li><p>Placeholders and Feed Dictionaries</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">input = tf.placeholder(tf.float32)</div><div class="line">input_value = ...</div><div class="line">...</div><div class="line">output = computation(input)</div><div class="line">...</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">	sess.run(output, feed_dict = &#123;input: input_value&#125;)</div></pre></td></tr></table></figure>
+<p>​</p>
+<p>​</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      How to prepare data for tensorflow
+    
+    </summary>
+    
+      <category term="TensorFlow" scheme="http://yuanfresa.github.io/categories/TensorFlow/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>关于 Batch Normalization</title>
@@ -36,15 +72,17 @@
   </entry>
   
   <entry>
-    <title>TensorFlow 学习笔记</title>
-    <link href="http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yuanfresa.github.io/TensorFlow/TensorFlow-学习笔记/</id>
+    <title>TensorFlow 学习笔记1</title>
+    <link href="http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
+    <id>http://yuanfresa.github.io/TensorFlow/TensorFlow-学习笔记1/</id>
     <published>2017-04-28T15:25:34.000Z</published>
-    <updated>2017-04-29T17:17:12.000Z</updated>
+    <updated>2017-04-30T12:41:53.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Basics-of-TensorFlow"><a href="#Basics-of-TensorFlow" class="headerlink" title="Basics of TensorFlow"></a>Basics of TensorFlow</h2><p>Ran operations in<code>tf.Session</code></p>
+    <content type="html"><![CDATA[<p>基本的TF functions 覆盖了NN的基本的流程，initialization, activation function, regularization, 并以经典的MNIST 为例走一遍。先define model，不变的比如input，labels 设为<code>tf.placeholder()</code>, 需要update的比如weights和bias设为<code>tf.Variables()</code>， 然后定义calculation，最后用<code>tf.Session().run()</code>计算，赋值需要用到<code>feed_dict</code></p>
+<h2 id="Basics-of-TensorFlow"><a href="#Basics-of-TensorFlow" class="headerlink" title="Basics of TensorFlow"></a>Basics of TensorFlow</h2><p>Ran operations in<code>tf.Session</code></p>
 <p>Create a constant tensor <code>tf.constant()</code></p>
 <p>Get input <code>tf.placeholder()</code> 用于函数run里定义and <code>feed_dict</code>用于tf.Session.run()赋值</p>
+<p>定义变量 <code>tf.Variable()</code></p>
 <p>Basic math <code>tf.add(), tf.subtract(), tf.multiply(), tf.divide()</code></p>
 <p>Convert data type <code>tf.cast()</code></p>
 <h2 id="Linear-Function-in-TF"><a href="#Linear-Function-in-TF" class="headerlink" title="Linear Function in TF"></a>Linear Function in TF</h2><p>Inputs, matrix of the weights and biases</p>
@@ -52,9 +90,9 @@
 
 <p>Weights $W$ and bias $b$ need to be a Tensor that can be modified-&gt; <code>tf.Variable</code></p>
 <p>Matrix multiplication <code>tf.matmul()</code>, orders matter!</p>
-<h3 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h3><p><code>tf.global_variables_initializer()</code> will initialize all TF variables.</p>
+<h3 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h3><p>TensorFlow variables must be initialized before they have values.</p>
+<p><code>tf.global_variables_initializer()</code> will initialize all TF variables.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init = tf.global_variables_initializer()</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">	sess.run(init)</div></pre></td></tr></table></figure>
-<p>Using the <a href="https://www.tensorflow.org/api_docs/python/tf/Variable" target="_blank" rel="external"><code>tf.Variable</code></a>class allows us to change the weights and bias, but an initial value needs to be chosen.</p>
 <p>Initialize the random weight from a normal distribution<code>tf.truncated_normal()</code> </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">n_features = <span class="number">120</span></div><div class="line">n_labels = <span class="number">5</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([n_features, n_labels]))</div></pre></td></tr></table></figure>
 <p>Initialize the bias to all zeros</p>
@@ -65,7 +103,6 @@
 <p>Sum function<code>tf.reduce_sum()</code> and log function <code>tf.log()</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crossentropy = -tf.reduce_sum(tf.multiply(tf.log(softmax), one_hot))</div></pre></td></tr></table></figure>
 <h3 id="Mini-batch"><a href="#Mini-batch" class="headerlink" title="Mini-batch"></a>Mini-batch</h3><p> Training on subsets of the dataset instead of all the data at one time.</p>
-<p>MNIST as an example, 28*28 <code>n_input = 784</code>, 10 digits <code>n_classed = 10</code></p>
 <ol>
 <li><p>Divide the data into batches</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Features and Labels</span></div><div class="line">features = tf.placeholder(tf.float32, [<span class="keyword">None</span>, n_input])</div><div class="line">labels = tf.placeholder(tf.float32, [<span class="keyword">None</span>, n_classes])</div></pre></td></tr></table></figure>
@@ -87,14 +124,25 @@
 <p>Since <code>tf.train.Saver.restore()</code> sets all the TensorFlow Variables, you don’t need to call <code>tf.global_variables_initializer()</code></p>
 <h2 id="Fine-Tuning"><a href="#Fine-Tuning" class="headerlink" title="Fine Tuning"></a>Fine Tuning</h2><p>Loading saved Variables directly into a modified model can generate errors. </p>
 <p>具体什么意思呢？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># suppose we have saved trained model</span></div><div class="line"><span class="comment"># Two Tensor Variables: weights and bias</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>])) <span class="comment">#Variable:0</span></div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>]))<span class="comment">#Variable_1:0</span></div><div class="line">saver.save(sess, save_file)</div><div class="line"></div><div class="line"><span class="comment"># Remove the previous setting</span></div><div class="line">tf.reset_default_graph()</div><div class="line"><span class="comment"># set new Variables </span></div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>])) <span class="comment"># Variable:0</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>]))<span class="comment">#Variable_1:0</span></div><div class="line"><span class="comment"># notice that the Variables order changed, the default Variable.name 根据顺序来的</span></div><div class="line">saver.restore(sess, save_file)</div></pre></td></tr></table></figure>
-<p><strong>Set the <code>name</code> manually.  </strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Two Tensor Variables: weights and bias</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>]), name=<span class="string">'weights_0'</span>)</div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>]), name=<span class="string">'bias_0'</span>)</div></pre></td></tr></table></figure>
-]]></content>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># suppose we have saved trained model</span></div><div class="line"><span class="comment"># Two Tensor Variables: weights and bias</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>])) <span class="comment">#name set by TF "Variable:0"</span></div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>]))<span class="comment"># "Variable_1:0"</span></div><div class="line">saver.save(sess, save_file)</div><div class="line"></div><div class="line"><span class="comment"># Remove the previous setting</span></div><div class="line">tf.reset_default_graph()</div><div class="line"><span class="comment"># set new Variables </span></div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>])) <span class="comment"># "Variable:0"</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>]))<span class="comment">#"Variable_1:0"</span></div><div class="line"><span class="comment"># notice that the Variables order changed, the default Variable.name 根据顺序来的</span></div><div class="line">saver.restore(sess, save_file)</div></pre></td></tr></table></figure>
+<p><strong>Set the <code>name</code> manually for models.  </strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Two Tensor Variables: weights and bias</span></div><div class="line">weights = tf.Variable(tf.truncated_normal([<span class="number">2</span>, <span class="number">3</span>]), name=<span class="string">'weights'</span>)</div><div class="line">bias = tf.Variable(tf.truncated_normal([<span class="number">3</span>]), name=<span class="string">'bias'</span>)</div></pre></td></tr></table></figure>
+<h2 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h2><p><code>tf.nn.dropout()</code></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNbRwgy1ff4s30hvc1j30we0fc41h.jpg" alt=""></p>
+<p>Dropout after Relu</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">keep_prob = tf.placeholder(tf.float32) <span class="comment"># probability to keep units</span></div><div class="line">									   </div><div class="line">hidden_layer = tf.add(tf.matmul(features, weights[<span class="number">0</span>]), biases[<span class="number">0</span>])</div><div class="line">hidden_layer = tf.nn.relu(hidden_layer)</div><div class="line">hidden_layer = tf.nn.dropout(hidden_layer, keep_prob)</div></pre></td></tr></table></figure>
+<p>During training, a good starting value for <code>keep_prob</code> is 0.5</p>
+<p>During testing,  <code>keep_prob = 1</code>  to keep all units and maximize the power of model.</p>
+<h2 id="TensorFlow-vs-Numpy"><a href="#TensorFlow-vs-Numpy" class="headerlink" title="TensorFlow vs Numpy"></a>TensorFlow vs Numpy</h2><p>Source from <a href="https://cs224d.stanford.edu/lectures/CS224d-Lecture7.pdf" target="_blank" rel="external">TensorFlow Tutorial</a></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNbRwgy1ff4vjzpabrj31fu0qytea.jpg" alt=""></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNbRwgy1ff4vhqxav3j31ge0poafm.jpg" alt=""></p>
+<p>TensorFlow computations define a computation graph that has no numerical value until evaluated!</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ta = tf.zeros((<span class="number">2</span>,<span class="number">2</span>))</div><div class="line">print(ta.eval())</div></pre></td></tr></table></figure>
+<h2 id="TF-Session-Object"><a href="#TF-Session-Object" class="headerlink" title="TF Session Object"></a>TF Session Object</h2>]]></content>
     
     <summary type="html">
     
-      Recording what I have learned about TF with DLND
+      TensorFlow notes for the Neural Network
     
     </summary>
     
