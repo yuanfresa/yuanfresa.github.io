@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yuanfresa.github.io/"/>
-  <updated>2017-04-30T12:13:24.000Z</updated>
+  <updated>2017-04-30T13:44:50.000Z</updated>
   <id>http://yuanfresa.github.io/</id>
   
   <author>
@@ -16,11 +16,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>preprocessing the data</title>
-    <link href="http://yuanfresa.github.io/TensorFlow/preprocessing-the-data/"/>
-    <id>http://yuanfresa.github.io/TensorFlow/preprocessing-the-data/</id>
+    <title>TensorFlow-学习笔记(2)</title>
+    <link href="http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/"/>
+    <id>http://yuanfresa.github.io/TensorFlow/TensorFlow-学习笔记-2/</id>
+    <published>2017-04-30T12:46:28.000Z</published>
+    <updated>2017-04-30T13:44:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="TF-Convolution-Layer"><a href="#TF-Convolution-Layer" class="headerlink" title="TF Convolution Layer"></a>TF Convolution Layer</h2><p> <code>tf.nn.conv2d()</code> and <code>tf.nn.bias_add()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># input/Image</span></div><div class="line">input = tf.placeholder(tf.float32, shape=[<span class="keyword">None</span>, image_height, image_width, 		 											color_channels])</div><div class="line"><span class="comment"># weight and bias </span></div><div class="line">weight = tf.Variable(tf.truncated_normal(</div><div class="line">    [filter_size_height, filter_size_width, color_channels, k_output]))</div><div class="line">bias = tf.Variable(tf.zeros(k_output))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(x, W, b, stride=<span class="number">1</span>)</span>:</span></div><div class="line">    x = tf.nn.conv2d(x, W, strides=[<span class="number">1</span>, stride, stride, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</div><div class="line">    x = tf.nn.bias_add(x, b)</div><div class="line">    <span class="keyword">return</span> tf.nn.relu(x) </div><div class="line"></div><div class="line">conv_layer = conv2d(input, weight, bias, strides=<span class="number">2</span>)</div></pre></td></tr></table></figure>
+<p><code>padding</code> can be <code>&#39;SAME&#39;</code>or <code>&#39;VALID&#39;</code></p>
+<h2 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h2><p>Conceptually, the benefit of the max pooling operation is to <strong>reduce the size of the input</strong>(which can help prevent overfitting), and allow the neural network to focus on only the <strong>most important elements</strong>. Max pooling does this by only retaining the maximum value for each filtered area, and removing the remaining values.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxpool2d</span><span class="params">(x, k=<span class="number">2</span>)</span>:</span></div><div class="line">    <span class="keyword">return</span> tf.nn.max_pool(x,ksize=[<span class="number">1</span>, k, k, <span class="number">1</span>],strides=[<span class="number">1</span>, k, k, <span class="number">1</span>],padding=<span class="string">'SAME'</span>)</div></pre></td></tr></table></figure>
+<p>4 element lists of <code>ksize</code> and <code>strides</code> corresponde to the dimension of the input tensor ([batch, height, width, channels]), batch and channel dimensions are typically set to <code>1</code>.</p>
+<p>Recently, pooling layers have fallen out of favor. Some reasons are:</p>
+<ul>
+<li>Recent datasets are so big and complex we’re more concerned about underfitting.</li>
+<li>Dropout is a much better regularizer.</li>
+<li>Pooling results in a loss of information. Think about the max pooling operation as an example. We only keep the largest of <em>n</em> numbers, thereby disregarding <em>n-1</em> numbers completely.</li>
+</ul>
+<h2 id="Walk-Through-MNIST-again-with-CNN"><a href="#Walk-Through-MNIST-again-with-CNN" class="headerlink" title="Walk Through MNIST again with CNN"></a>Walk Through MNIST again with CNN</h2><p>Define the <strong>model</strong>: </p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNbRwgy1ff51ax761aj30xu0g00vc.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Store layers weight &amp; bias</span></div><div class="line"><span class="comment"># [filter_size_height, filter_size_width, color_channels, k_output]</span></div><div class="line">weights = &#123;</div><div class="line">    <span class="string">'wc1'</span>: tf.Variable(tf.random_normal([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>])),</div><div class="line">    <span class="string">'wc2'</span>: tf.Variable(tf.random_normal([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>])),</div><div class="line">    <span class="string">'wd1'</span>: tf.Variable(tf.random_normal([<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>, <span class="number">1024</span>])),</div><div class="line">    <span class="string">'out'</span>: tf.Variable(tf.random_normal([<span class="number">1024</span>, n_classes]))&#125;</div><div class="line"></div><div class="line">biases = &#123;</div><div class="line">    <span class="string">'bc1'</span>: tf.Variable(tf.random_normal([<span class="number">32</span>])),</div><div class="line">    <span class="string">'bc2'</span>: tf.Variable(tf.random_normal([<span class="number">64</span>])),</div><div class="line">    <span class="string">'bd1'</span>: tf.Variable(tf.random_normal([<span class="number">1024</span>])),</div><div class="line">    <span class="string">'out'</span>: tf.Variable(tf.random_normal([n_classes]))&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_net</span><span class="params">(x, weights, biases, dropout)</span>:</span></div><div class="line">    <span class="comment"># Layer 1 - 28*28*1 to 14*14*32</span></div><div class="line">    conv1 = conv2d(x, weights[<span class="string">'wc1'</span>], biases[<span class="string">'bc1'</span>])</div><div class="line">    conv1 = maxpool2d(conv1, k=<span class="number">2</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Layer 2 - 14*14*32 to 7*7*64</span></div><div class="line">    conv2 = conv2d(conv1, weights[<span class="string">'wc2'</span>], biases[<span class="string">'bc2'</span>])</div><div class="line">    conv2 = maxpool2d(conv2, k=<span class="number">2</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Fully connected layer - 7*7*64 to 1024</span></div><div class="line">    fc1 = tf.reshape(conv2, [<span class="number">-1</span>, weights[<span class="string">'wd1'</span>].get_shape().as_list()[<span class="number">0</span>]])</div><div class="line">    fc1 = tf.add(tf.matmul(fc1, weights[<span class="string">'wd1'</span>]), biases[<span class="string">'bd1'</span>])</div><div class="line">    fc1 = tf.nn.relu(fc1)</div><div class="line">    fc1 = tf.nn.dropout(fc1, dropout)</div><div class="line"></div><div class="line">    <span class="comment"># Output Layer - class prediction - 1024 to 10</span></div><div class="line">    out = tf.add(tf.matmul(fc1, weights[<span class="string">'out'</span>]), biases[<span class="string">'out'</span>])</div><div class="line">    <span class="keyword">return</span> out</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      TensorFlow notes for the Convolutional Neural Network
+    
+    </summary>
+    
+      <category term="TensorFlow" scheme="http://yuanfresa.github.io/categories/TensorFlow/"/>
+    
+    
+      <category term="deep learning" scheme="http://yuanfresa.github.io/tags/deep-learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Preprocessing the Data</title>
+    <link href="http://yuanfresa.github.io/TensorFlow/Preprocessing-the-Data/"/>
+    <id>http://yuanfresa.github.io/TensorFlow/Preprocessing-the-Data/</id>
     <published>2017-04-30T09:56:26.000Z</published>
-    <updated>2017-04-30T12:13:24.000Z</updated>
+    <updated>2017-04-30T12:45:59.000Z</updated>
     
     <content type="html"><![CDATA[<p>并不是所有的data都会像mnist那样直接可以直接用</p>
 <p><code>from tensorflow.examples.tutorials.mnist import input_data</code> </p>
@@ -42,12 +79,14 @@
     
     <summary type="html">
     
-      How to prepare data for tensorflow
+      How to prepare data for TensorFlow
     
     </summary>
     
       <category term="TensorFlow" scheme="http://yuanfresa.github.io/categories/TensorFlow/"/>
     
+    
+      <category term="deep learning" scheme="http://yuanfresa.github.io/tags/deep-learning/"/>
     
   </entry>
   
@@ -72,13 +111,13 @@
   </entry>
   
   <entry>
-    <title>TensorFlow 学习笔记1</title>
-    <link href="http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
-    <id>http://yuanfresa.github.io/TensorFlow/TensorFlow-学习笔记1/</id>
+    <title>TensorFlow 学习笔记(1)</title>
+    <link href="http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/"/>
+    <id>http://yuanfresa.github.io/TensorFlow/TensorFlow-学习笔记-1/</id>
     <published>2017-04-28T15:25:34.000Z</published>
-    <updated>2017-04-30T12:41:53.000Z</updated>
+    <updated>2017-04-30T15:06:14.000Z</updated>
     
-    <content type="html"><![CDATA[<p>基本的TF functions 覆盖了NN的基本的流程，initialization, activation function, regularization, 并以经典的MNIST 为例走一遍。先define model，不变的比如input，labels 设为<code>tf.placeholder()</code>, 需要update的比如weights和bias设为<code>tf.Variables()</code>， 然后定义calculation，最后用<code>tf.Session().run()</code>计算，赋值需要用到<code>feed_dict</code></p>
+    <content type="html"><![CDATA[<p>基本的TF functions, 覆盖了NN的基本的流程，initialization, activation function, regularization, 并以经典的MNIST 为例走一遍。先define model，不变的比如input，labels 设为<code>tf.placeholder()</code>, 需要update的比如weights和bias设为<code>tf.Variables()</code>， 然后定义calculation，最后用<code>tf.Session().run()</code>计算，赋值需要用到<code>feed_dict</code></p>
 <h2 id="Basics-of-TensorFlow"><a href="#Basics-of-TensorFlow" class="headerlink" title="Basics of TensorFlow"></a>Basics of TensorFlow</h2><p>Ran operations in<code>tf.Session</code></p>
 <p>Create a constant tensor <code>tf.constant()</code></p>
 <p>Get input <code>tf.placeholder()</code> 用于函数run里定义and <code>feed_dict</code>用于tf.Session.run()赋值</p>
@@ -119,6 +158,7 @@
 <h2 id="Save-and-Restore-TensorFlow-Models"><a href="#Save-and-Restore-TensorFlow-Models" class="headerlink" title="Save and Restore TensorFlow Models"></a>Save and Restore TensorFlow Models</h2><blockquote>
 <p>Training a deep learning model from scratch on a large dataset is expensive computationally. Save the models once finishing training.</p>
 </blockquote>
+<p><a href="https://blog.metaflow.fr/tensorflow-saving-restoring-and-mixing-multiple-models-c4c94d5d7125" target="_blank" rel="external">Useful tutorial</a></p>
 <h3 id="Save-a-Trained-Model"><a href="#Save-a-Trained-Model" class="headerlink" title="Save a Trained Model"></a>Save a Trained Model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Remove previous Tensors and Operations</span></div><div class="line">tf.reset_default_graph()</div><div class="line"></div><div class="line"><span class="comment"># start with a model</span></div><div class="line"><span class="comment">## 省略 data, placeholder, Variable, operation, loss and optimizer, accuracy</span></div><div class="line"></div><div class="line"><span class="comment"># The file path to save the data</span></div><div class="line">save_file = <span class="string">'./train_model.ckpt'</span> <span class="comment"># checkpoint</span></div><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="comment"># 省略一堆 sess.run() init, optimizer, accuracy</span></div><div class="line"></div><div class="line"><span class="comment"># Save the model</span></div><div class="line">    saver.save(sess, save_file)</div><div class="line">    print(<span class="string">'Trained Model Saved.'</span>)</div></pre></td></tr></table></figure>
 <h3 id="Load-a-Trained-Model"><a href="#Load-a-Trained-Model" class="headerlink" title="Load a Trained Model"></a>Load a Trained Model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">saver = tf.train.Saver()</div><div class="line"></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="comment"># Load the model</span></div><div class="line">    saver.restore(sess, save_file)</div><div class="line">    </div><div class="line">    test_accuracy = sess.run(accuracy,</div><div class="line">        feed_dict=&#123;features: mnist.test.images, labels: mnist.test.labels&#125;)</div><div class="line"></div><div class="line">print(<span class="string">'Test Accuracy: &#123;&#125;'</span>.format(test_accuracy))</div></pre></td></tr></table></figure>
 <p>Since <code>tf.train.Saver.restore()</code> sets all the TensorFlow Variables, you don’t need to call <code>tf.global_variables_initializer()</code></p>
@@ -138,7 +178,7 @@
 <p><img src="http://ww3.sinaimg.cn/large/006tNbRwgy1ff4vhqxav3j31ge0poafm.jpg" alt=""></p>
 <p>TensorFlow computations define a computation graph that has no numerical value until evaluated!</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ta = tf.zeros((<span class="number">2</span>,<span class="number">2</span>))</div><div class="line">print(ta.eval())</div></pre></td></tr></table></figure>
-<h2 id="TF-Session-Object"><a href="#TF-Session-Object" class="headerlink" title="TF Session Object"></a>TF Session Object</h2>]]></content>
+]]></content>
     
     <summary type="html">
     

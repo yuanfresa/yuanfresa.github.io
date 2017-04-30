@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/</loc>
+    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</loc>
     
-    <lastmod>2017-04-30T12:41:53.000Z</lastmod>
+    <lastmod>2017-04-30T15:06:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yuanfresa.github.io/TensorFlow/preprocessing-the-data/</loc>
+    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</loc>
     
-    <lastmod>2017-04-30T12:13:24.000Z</lastmod>
+    <lastmod>2017-04-30T13:44:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/TensorFlow/Preprocessing-the-Data/</loc>
+    
+    <lastmod>2017-04-30T12:45:59.000Z</lastmod>
     
   </url>
   
