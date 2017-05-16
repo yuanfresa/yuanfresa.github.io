@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yuanfresa.github.io/Practice-Coding/Codility-Test/</loc>
+    <loc>http://yuanfresa.github.io/Papers/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
     
-    <lastmod>2017-05-16T21:17:28.000Z</lastmod>
+    <lastmod>2017-05-16T21:19:09.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yuanfresa.github.io/paper-notes/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
+    <loc>http://yuanfresa.github.io/Online-Course/Programming-Foundations-with-Python/</loc>
     
-    <lastmod>2017-05-16T21:17:04.000Z</lastmod>
+    <lastmod>2017-05-16T21:18:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Practice-Coding/Codility-Test/</loc>
+    
+    <lastmod>2017-05-16T21:17:28.000Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</loc>
     
     <lastmod>2017-05-16T21:16:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/Online-course/Programming-Foundations-with-Python/</loc>
-    
-    <lastmod>2017-05-16T21:16:28.000Z</lastmod>
     
   </url>
   
