@@ -2,16 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yuanfresa.github.io/Online-course/Programming-Foundations-with-Python/</loc>
+    <loc>http://yuanfresa.github.io/Practice-Coding/Codility-Test/</loc>
     
-    <lastmod>2017-05-16T21:12:55.000Z</lastmod>
+    <lastmod>2017-05-16T21:17:28.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yuanfresa.github.io/practice-makes-perfect/Codility-Test/</loc>
+    <loc>http://yuanfresa.github.io/paper-notes/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
     
-    <lastmod>2017-05-16T21:09:59.000Z</lastmod>
+    <lastmod>2017-05-16T21:17:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</loc>
+    
+    <lastmod>2017-05-16T21:16:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</loc>
+    
+    <lastmod>2017-05-16T21:16:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Online-course/Programming-Foundations-with-Python/</loc>
+    
+    <lastmod>2017-05-16T21:16:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/TensorFlow/Preprocessing-the-Data/</loc>
+    
+    <lastmod>2017-05-16T21:16:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Online-Course/CS231n-Neural-Network-part3-Learning-and-Evaluation-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2017-05-16T21:15:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Online-Course/CS231n-Neural-Network-part2-Setting-up-the-data-and-the-model-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2017-05-16T21:15:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Online-Course/CS231n-Neural-Network-part1-Setting-up-the-Architecture-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2017-05-16T21:15:09.000Z</lastmod>
     
   </url>
   
@@ -19,48 +68,6 @@
     <loc>http://yuanfresa.github.io/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/Learning-Google-Python-Style/</loc>
     
     <lastmod>2017-05-16T18:57:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/</loc>
-    
-    <lastmod>2017-05-08T20:07:56.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/TensorFlow/TensorFlow-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/</loc>
-    
-    <lastmod>2017-04-30T13:44:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/TensorFlow/Preprocessing-the-Data/</loc>
-    
-    <lastmod>2017-04-30T12:45:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/paper-notes/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
-    
-    <lastmod>2017-04-28T15:36:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/CS231n-notebook/CS231n-Neural-Network-part2-Setting-up-the-data-and-the-model-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-04-28T15:34:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/CS231n-notebook/CS231n-Neural-Network-part3-Learning-and-Evaluation-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-04-26T20:42:26.000Z</lastmod>
     
   </url>
   
@@ -75,13 +82,6 @@
     <loc>http://yuanfresa.github.io/about/index.html</loc>
     
     <lastmod>2017-04-24T22:23:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/CS231n-notebook/CS231n-Neural-Network-part1-Setting-up-the-Architecture-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2017-04-24T21:12:40.000Z</lastmod>
     
   </url>
   
