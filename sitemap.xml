@@ -2,23 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yuanfresa.github.io/Papers/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
+    <loc>http://yuanfresa.github.io/Online-Course/Programming-Foundations-with-Python/</loc>
     
-    <lastmod>2017-05-16T21:19:09.000Z</lastmod>
+    <lastmod>2017-05-16T21:27:10.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yuanfresa.github.io/Online-Course/Programming-Foundations-with-Python/</loc>
+    <loc>http://yuanfresa.github.io/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/Learning-Google-Python-Style/</loc>
     
-    <lastmod>2017-05-16T21:18:51.000Z</lastmod>
+    <lastmod>2017-05-16T21:26:18.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yuanfresa.github.io/Practice-Coding/Codility-Test/</loc>
     
-    <lastmod>2017-05-16T21:17:28.000Z</lastmod>
+    <lastmod>2017-05-16T21:24:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yuanfresa.github.io/Papers/%E5%85%B3%E4%BA%8E-Batch-Normalization/</loc>
+    
+    <lastmod>2017-05-16T21:19:09.000Z</lastmod>
     
   </url>
   
@@ -61,13 +68,6 @@
     <loc>http://yuanfresa.github.io/Online-Course/CS231n-Neural-Network-part1-Setting-up-the-Architecture-%E6%80%BB%E7%BB%93%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2017-05-16T21:15:09.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yuanfresa.github.io/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE/Learning-Google-Python-Style/</loc>
-    
-    <lastmod>2017-05-16T18:57:35.000Z</lastmod>
     
   </url>
   
